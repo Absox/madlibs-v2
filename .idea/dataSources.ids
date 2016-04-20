@@ -52664,8 +52664,8 @@ umserver</columns>
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>
         <comment>standard public schema</comment>
-        <introspection-state-number>742</introspection-state-number>
-        <introspection-timestamp>2016-04-19.21:56:05.744</introspection-timestamp>
+        <introspection-state-number>782</introspection-state-number>
+        <introspection-timestamp>2016-04-20.11:57:48.055</introspection-timestamp>
       </schema>
       <schema id="3" parent="1" name="pg_catalog">
         <object-id>11</object-id>
@@ -52674,12 +52674,12 @@ umserver</columns>
         <introspection-timestamp>2016-04-19.21:56:05.845</introspection-timestamp>
       </schema>
       <sequence id="4" parent="2" name="hibernate_sequence">
-        <object-id>16415</object-id>
-        <state-number>740</state-number>
+        <object-id>16488</object-id>
+        <state-number>780</state-number>
       </sequence>
       <table id="5" parent="2" name="users">
-        <object-id>16417</object-id>
-        <state-number>741</state-number>
+        <object-id>16490</object-id>
+        <state-number>781</state-number>
       </table>
       <table id="6" parent="3" name="pg_aggregate">
         <object-id>2600</object-id>
@@ -71564,30 +71564,30 @@ umserver</columns>
         <bind-function>bpchariclike(char,text)</bind-function>
       </operator>
       <column id="3354" parent="5" name="id">
-        <state-number>741</state-number>
+        <state-number>781</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
       <column id="3355" parent="5" name="password_digest">
-        <state-number>741</state-number>
+        <state-number>781</state-number>
         <data-type>varchar(255)</data-type>
       </column>
       <column id="3356" parent="5" name="salt">
-        <state-number>741</state-number>
+        <state-number>781</state-number>
         <data-type>varchar(255)</data-type>
       </column>
       <column id="3357" parent="5" name="username">
-        <state-number>741</state-number>
+        <state-number>781</state-number>
         <data-type>varchar(255)</data-type>
       </column>
       <index id="3358" parent="5" name="users_pkey">
-        <object-id>16423</object-id>
+        <object-id>16496</object-id>
         <columns>id</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
       <index id="3359" parent="5" name="uk_r43af9ap4edm43mmtq01oddj6">
-        <object-id>16425</object-id>
+        <object-id>16498</object-id>
         <columns>username</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>

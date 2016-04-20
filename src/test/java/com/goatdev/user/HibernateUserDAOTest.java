@@ -40,11 +40,11 @@ public class HibernateUserDAOTest {
 
     @Test
     public void testUpdate() {
-        User newUser = new User("username", "password");
+        User newUser = new User("updateTestUser", "password");
         assertTrue(userDAO.saveUser(newUser));
         newUser.changePassword("newPassword");
         assertTrue(userDAO.saveUser(newUser));
-        User retrieved = userDAO.getUser("username");
+        User retrieved = userDAO.getUser("updateTestUser");
         assertNotNull(retrieved);
         assertFalse(retrieved.authenticate("password"));
         assertTrue(retrieved.authenticate("newPassword"));
