@@ -3,7 +3,7 @@ package com.goatdev.util;
 import java.util.HashMap;
 
 /**
- * A queue with a hashmap.
+ * A queue with a hashmap enabling O(1) arbitrary removal.
  * Created by ran on 4/20/16.
  */
 public class HashQueue<KeyType, DataType> {
