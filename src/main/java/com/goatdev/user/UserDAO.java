@@ -6,7 +6,9 @@ package com.goatdev.user;
  */
 public interface UserDAO {
 
-    public boolean saveUser(User user);
+    public Integer createUser(User user);
+
+    public boolean updateUser(User user);
 
     public User getUser(String username);
 

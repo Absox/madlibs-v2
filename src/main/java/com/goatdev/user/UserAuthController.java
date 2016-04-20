@@ -5,8 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Controller for user auth.
  * Created by ran on 4/19/16.
@@ -22,10 +20,14 @@ public class UserAuthController {
     public ResponseEntity<UserRegistrationResponse> register(@RequestBody UserRegistrationRequest request) {
 
         if (request.username == null || request.password == null) {
-
+            return new ResponseEntity<>(new UserRegistrationResponse("Parameters required"), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<UserRegistrationResponse>(new UserRegistrationResponse(0), HttpStatus.ACCEPTED);
+        if (userDAO.getUser(request.username) != null) {
+            return new ResponseEntity<>(new UserRegistrationResponse("Username taken"), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(new UserRegistrationResponse(userDAO.createUser(new User(request.username, request.password))), HttpStatus.ACCEPTED);
     }
 
     public static class UserRegistrationRequest {
@@ -56,11 +58,13 @@ public class UserAuthController {
 
         int id;
 
-        public UserRegistrationResponse(int id) {
-            this.id = id;
+        String reason;
+
+        public UserRegistrationResponse(String reason) {
+            this.reason = reason;
         }
 
-        public void setId(int id) {
+        public UserRegistrationResponse(int id) {
             this.id = id;
         }
 
@@ -68,6 +72,9 @@ public class UserAuthController {
             return id;
         }
 
+        public String getReason() {
+            return reason;
+        }
     }
 
 }

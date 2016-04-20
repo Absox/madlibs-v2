@@ -26,7 +26,7 @@ public class HibernateUserDAOTest {
     @Test
     public void testCreate() {
         User newUser = new User("username", "password");
-        assertTrue(userDAO.saveUser(newUser));
+        assertNotNull(userDAO.createUser(newUser));
         User retrieved = userDAO.getUser("username");
         assertNotNull(retrieved);
         assertTrue(retrieved.authenticate("password"));
@@ -41,9 +41,11 @@ public class HibernateUserDAOTest {
     @Test
     public void testUpdate() {
         User newUser = new User("updateTestUser", "password");
-        assertTrue(userDAO.saveUser(newUser));
+        assertFalse(userDAO.updateUser(newUser));
+
+        assertNotNull(userDAO.createUser(newUser));
         newUser.changePassword("newPassword");
-        assertTrue(userDAO.saveUser(newUser));
+        assertTrue(userDAO.updateUser(newUser));
         User retrieved = userDAO.getUser("updateTestUser");
         assertNotNull(retrieved);
         assertFalse(retrieved.authenticate("password"));

@@ -15,23 +15,38 @@ public class HibernateUserDAO implements UserDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public boolean saveUser(User user) {
+    public Integer createUser(User user) {
+        Integer id = null;
+
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            id = (Integer)session.save(user);
+            transaction.commit();
+        } catch (HibernateException e) {
+            id = null;
+            transaction.rollback();
+        }
+        session.close();
+        return id;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        boolean success = true;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        boolean success = true;
-
         try {
-            session.saveOrUpdate(user);
+            session.update(user);
             transaction.commit();
         } catch (HibernateException e) {
-            transaction.rollback();
             success = false;
-        } finally {
-            session.close();
+            transaction.rollback();
         }
 
-        return true;
+        session.close();
+        return success;
     }
 
     @Override
