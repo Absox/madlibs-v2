@@ -9,7 +9,7 @@
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" value="2caed948-465d-4757-bd2a-b8590cc8e3f3" />
           <unit-entry name="hibernate_test_configs.cfg.xml" value="a866bb13-4aba-47e2-a569-7b332aeb3a20" />
-          <unit-entry name="sessionFactory" value="adc00907-c35b-4564-8042-51869927c7cf" />
+          <unit-entry name="sessionFactory" value="2caed948-465d-4757-bd2a-b8590cc8e3f3" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />

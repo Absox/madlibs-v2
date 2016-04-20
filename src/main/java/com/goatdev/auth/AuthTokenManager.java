@@ -1,6 +1,7 @@
 package com.goatdev.auth;
 
 import com.goatdev.user.User;
+import com.goatdev.util.HashQueue;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -12,48 +13,29 @@ import java.util.*;
 @Component
 public class AuthTokenManager {
 
-    private HashMap<String, AuthToken> tokenMap;
-    private Queue<AuthToken> expirationQueue;
+    private HashQueue<String, AuthToken> tokenHashQueue;
 
     public AuthTokenManager() {
-        tokenMap = new HashMap<>();
-        expirationQueue = new LinkedList<>();
+        this.tokenHashQueue = new HashQueue<>();
     }
 
-    /**
-     * Issues an auth token.
-     * @param user User to issue token for.
-     * @return Auth token issued.
-     */
     public AuthToken issueToken(User user) {
         clearExpiredTokens();
-
-        AuthToken newToken = new AuthToken(
-                new Date(System.currentTimeMillis() + 1000 * 60 * 60),
-                UUID.randomUUID().toString(), user);
-        tokenMap.put(newToken.getValue(), newToken);
-        expirationQueue.add(newToken);
+        AuthToken newToken = new AuthToken(new Date(System.currentTimeMillis() + 1000 * 60 * 60), UUID.randomUUID().toString(), user);
+        tokenHashQueue.enqueue(newToken.getValue(), newToken);
         return newToken;
     }
 
     public AuthToken authenticate(String authTokenValue) {
         clearExpiredTokens();
-
-        if (tokenMap.containsKey(authTokenValue)) {
-            AuthToken oldToken = tokenMap.remove(authTokenValue);
-            return issueToken(oldToken.getUser());
-        } else {
-            return null;
-        }
+        AuthToken oldToken = tokenHashQueue.remove(authTokenValue);
+        if (oldToken == null) return null;
+        return issueToken(oldToken.getUser());
     }
 
-    /**
-     * Clears all expired tokens.
-     */
     private void clearExpiredTokens() {
-        while (expirationQueue.peek() != null && expirationQueue.peek().getExpiration().after(new Date())) {
-            AuthToken toRemove = expirationQueue.remove();
-            if (tokenMap.containsKey(toRemove.getValue())) tokenMap.remove(toRemove.getValue());
+        while (!tokenHashQueue.isEmpty() && tokenHashQueue.peek().isExpired()) {
+            tokenHashQueue.dequeue();
         }
     }
 }

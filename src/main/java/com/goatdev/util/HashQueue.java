@@ -79,6 +79,10 @@ public class HashQueue<KeyType, DataType> {
         return size;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     private static class Node<KeyType, DataType> {
         Node<KeyType, DataType> previous;
         Node<KeyType, DataType> next;

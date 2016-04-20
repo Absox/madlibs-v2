@@ -26,6 +26,10 @@ public class AuthToken {
         this.user = user;
     }
 
+    public boolean isExpired() {
+        return expiration.after(new Date());
+    }
+
     public User getUser() {
         return user;
     }
