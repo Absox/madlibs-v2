@@ -1,6 +1,7 @@
 package com.goatdev.user;
 
 import com.goatdev.ApplicationTestConfigs;
+import com.goatdev.auth.AuthTokenManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,20 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        classes = {ApplicationTestConfigs.class, HibernateUserDAO.class, UserAuthController.class},
+        classes = {
+                ApplicationTestConfigs.class,
+                HibernateUserDAO.class,
+                UserAuthController.class,
+                AuthTokenManager.class,
+        },
         loader = AnnotationConfigContextLoader.class)
 public class UserAuthControllerTest {
 
     @Autowired
     private UserAuthController userAuthController;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Test
     public void testRegistration() {
@@ -45,6 +54,24 @@ public class UserAuthControllerTest {
         ResponseEntity<UserAuthController.UserRegistrationResponse> empty
                 = userAuthController.register(new UserAuthController.UserRegistrationRequest());
         assertEquals(empty.getStatusCode(), HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    public void testLogin() {
+        User loginTestUser = new User("loginTestUser", "password");
+        assertNotNull(userDAO.createUser(loginTestUser));
+
+        ResponseEntity<UserAuthController.UserLoginResponse> response
+                = userAuthController.login(new UserAuthController.UserLoginRequest("loginTestUser", "password"));
+        assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+
+        ResponseEntity<UserAuthController.UserLoginResponse> noUserResponse
+                = userAuthController.login(new UserAuthController.UserLoginRequest("noSuchUser", "password"));
+        assertEquals(noUserResponse.getStatusCode(), HttpStatus.BAD_REQUEST);
+
+        ResponseEntity<UserAuthController.UserLoginResponse> wrongPasswordResponse
+                = userAuthController.login(new UserAuthController.UserLoginRequest("loginTestUser", "wrongPassword"));
+        assertEquals(wrongPasswordResponse.getStatusCode(), HttpStatus.BAD_REQUEST);
     }
 
 }

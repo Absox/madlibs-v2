@@ -3,7 +3,6 @@ package com.goatdev.auth;
 import com.goatdev.user.User;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Authentication token class.
@@ -16,9 +15,6 @@ public class AuthToken {
     private String value;
 
     private User user;
-
-    public AuthToken() {
-    }
 
     public AuthToken(Date expiration, String value, User user) {
         this.expiration = expiration;
@@ -38,19 +34,8 @@ public class AuthToken {
         this.user = user;
     }
 
-    public Date getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(Date expiration) {
-        this.expiration = expiration;
-    }
-
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
 }
