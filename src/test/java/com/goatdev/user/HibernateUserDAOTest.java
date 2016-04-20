@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class HibernateUserDAOTest {
 
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Test
     public void testCreate() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3710870473">
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="adc00907-c35b-4564-8042-51869927c7cf">
+  <component name="DataSourceManagerImpl" format="xml" hash="1309443463">
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="2caed948-465d-4757-bd2a-b8590cc8e3f3">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
@@ -11,16 +11,8 @@
       <explain-plan-config>
         <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
       </explain-plan-config>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-driver-license.txt</url>
-        </library>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-9.4-1201.jdbc4.jar</url>
-        </library>
-      </libraries>
     </data-source>
-    <data-source source="LOCAL" name="hibernate_test_configs.cfg.xml/Hibernate" uuid="6b98195c-c41a-40ad-bacb-6ddc5cba03fc">
+    <data-source source="LOCAL" name="hibernate_test_configs.cfg.xml/Hibernate" uuid="a866bb13-4aba-47e2-a569-7b332aeb3a20">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
@@ -30,14 +22,6 @@
       <explain-plan-config>
         <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
       </explain-plan-config>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-driver-license.txt</url>
-        </library>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-9.4-1201.jdbc4.jar</url>
-        </library>
-      </libraries>
     </data-source>
   </component>
 </project>

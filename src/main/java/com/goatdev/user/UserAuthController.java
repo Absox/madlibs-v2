@@ -36,6 +36,14 @@ public class UserAuthController {
 
         String password;
 
+        public UserRegistrationRequest() {
+        }
+
+        public UserRegistrationRequest(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
         public void setUsername(String username) {
             this.username = username;
         }
@@ -56,7 +64,7 @@ public class UserAuthController {
 
     public static class UserRegistrationResponse {
 
-        int id;
+        Integer id;
 
         String reason;
 
@@ -64,7 +72,7 @@ public class UserAuthController {
             this.reason = reason;
         }
 
-        public UserRegistrationResponse(int id) {
+        public UserRegistrationResponse(Integer id) {
             this.id = id;
         }
 
