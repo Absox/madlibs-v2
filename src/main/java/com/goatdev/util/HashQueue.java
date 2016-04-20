@@ -21,9 +21,7 @@ public class HashQueue<KeyType, DataType> {
         size = 0;
     }
 
-    public void enqueue(KeyType key, DataType data) throws Exception {
-        if (nodeMapping.containsKey(key)) throw new Exception("Attempting to insert duplicate key into map.");
-
+    public void enqueue(KeyType key, DataType data) {
         Node<KeyType, DataType> newNode = new Node<>(key, data);
 
         // If we're empty, populate the pointers.
@@ -74,7 +72,11 @@ public class HashQueue<KeyType, DataType> {
         if (toRemove.previous != null) toRemove.previous.next = toRemove.next;
         if (toRemove.next != null) toRemove.next.previous = toRemove.previous;
 
-        return null;
+        return toRemove.data;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private static class Node<KeyType, DataType> {
@@ -90,9 +92,4 @@ public class HashQueue<KeyType, DataType> {
             next = null;
         }
     }
-
-    public int getSize() {
-        return size;
-    }
-
 }
